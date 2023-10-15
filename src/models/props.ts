@@ -7,3 +7,8 @@ export type NavigationProps = {
 export type NewsCarouselProps = {
     news: News[];
 }
+
+export type MsgOverlayProps = {
+    isLoading: boolean;
+    displayMessage?: string;
+}
