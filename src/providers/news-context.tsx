@@ -59,8 +59,6 @@ export const NewsProvider = ({ children }: { children: ReactNode }) => {
         }
     }
 
-
-
     return (
         <NewsContext.Provider value={{ getLatestNews, setTitleFilter }}>
             {children}

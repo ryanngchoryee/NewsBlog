@@ -10,7 +10,7 @@ const Navigation: React.FC<NavigationProps> = ({ onTitleFilterChange }) => {
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-        onTitleFilterChange(searchValue)
+        onTitleFilterChange(searchValue) //allow filter submission when unfocus from text box
     }
 
     const handleSubmit = (e: FormEvent) => {
@@ -18,7 +18,7 @@ const Navigation: React.FC<NavigationProps> = ({ onTitleFilterChange }) => {
     }
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setSearchValue(e.target.value);
+        setSearchValue(e.target.value); // override input value with manual set
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -26,13 +26,13 @@ const Navigation: React.FC<NavigationProps> = ({ onTitleFilterChange }) => {
             e.preventDefault(); // Prevent the default Enter key behavior
             onTitleFilterChange(searchValue);
             if (inputRef.current) {
-                inputRef.current.blur(); // Unfocus the input
+                inputRef.current.blur(); // Unfocus the input 
             }
         }
     }
 
     return (
-        <Navbar sticky="top" className="navbar bg-dark" > {/* Use bg and expand props for Bootstrap styling */}
+        <Navbar sticky="top" className="navbar bg-dark" >
             <Container fluid className="p-0">
                 <Navbar.Brand href="#home" className="text-light mx-4 navbar-brand">News Blog</Navbar.Brand>
                 <Form className="mx-4" onSubmit={handleSubmit}>
@@ -40,8 +40,8 @@ const Navigation: React.FC<NavigationProps> = ({ onTitleFilterChange }) => {
                         type="text"
                         placeholder="Search news title..."
                         className="mr-sm-2"
-                        value={searchValue}
-                        onChange={handleInputChange}
+                        value={searchValue} // use state value as input value
+                        onChange={handleInputChange} // handle manual value setting
                         onBlur={handleBlur} // allow user to search by clicking on other whitespace
                         onKeyDown={handleKeyDown} // allow user to submit by pressing enter
                         ref={inputRef} // Attach a ref to the input element
