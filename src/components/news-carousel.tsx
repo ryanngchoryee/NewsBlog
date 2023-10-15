@@ -13,7 +13,7 @@ const NewsCarousel: React.FC<NewsCarouselProps> = ({ news }) => {
                 {news.map((newsItem) => {
                     return (
                         <Carousel.Item>
-                            <Image className='carousel-image' src={newsItem.image_url} />
+                            <Image className='carousel-image' src={newsItem.image_url == null ? '/assets/image-not-found.png' : newsItem.image_url} />
                             <Carousel.Caption className='caption-container'>
                                 <h4 className='caption-title'>{newsItem.title}</h4>
                                 <p className='caption-description'>{newsItem.description}</p>
