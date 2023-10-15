@@ -3,11 +3,11 @@ This is a single-page NewsBlog React with Typescript application that allows use
 
 # How to use 
 1. Enter title filter in the text box and hit the "Enter" key on yoru keyboard (or mouse click on any other area other than the textbox).
-![image](https://github.com/ryanngchoryee/NewsBlog/assets/43519076/3fe29eb6-7e47-4b82-8516-cee4ae478a67)
+![image](https://github.com/ryanngchoryee/NewsBlog/assets/43519076/c92d1a35-d81f-421d-9497-663a23351484)
 2. Wait for the loading bar to finish.
-![image](https://github.com/ryanngchoryee/NewsBlog/assets/43519076/db6f62f1-d862-4fed-9639-28f9d93f52f7)
+![image](https://github.com/ryanngchoryee/NewsBlog/assets/43519076/2da4fa6d-4d34-4367-8316-f3cb1f0bb6b1)
 3. Ta-da! Here goes the top 3 news based on your input filter! Use the arrow button on both side to browse through the Top 3 News.
-![image](https://github.com/ryanngchoryee/NewsBlog/assets/43519076/321b833b-b79a-4c61-93dd-d877e58f72b6)
+![image](https://github.com/ryanngchoryee/NewsBlog/assets/43519076/db18c5d3-ad6f-45f0-8ad5-4ca292d72020)
 
 # Assumption Made
 1. English has been choosen as default and only language.
@@ -22,4 +22,5 @@ This is a single-page NewsBlog React with Typescript application that allows use
 1. Azure DevOps sprint backlog has been use for task planning & execution
 https://dev.azure.com/ipainternational/BlogPage/_sprints/backlog/BlogPage%20Team/BlogPage/Sprint%201
 (kindly request access if needed)
-![image](https://github.com/ryanngchoryee/NewsBlog/assets/43519076/6a147989-b2d7-455e-b71f-39b11908b123)
+![image](https://github.com/ryanngchoryee/NewsBlog/assets/43519076/87c63e18-6fda-47a8-b850-2b4178329fdc)
+
