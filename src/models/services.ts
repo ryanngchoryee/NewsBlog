@@ -1,5 +1,6 @@
 import { LatestNewsPayload } from "./responses-payload";
 
-export interface NewsService {
-    getLatestNews: (titleFilter: string, page?: number) => Promise<LatestNewsPayload>;
+export type NewsService = {
+    getLatestNews: () => Promise<LatestNewsPayload | undefined>;
+    setTitleFilter: (titleFilter: string) => void;
 }

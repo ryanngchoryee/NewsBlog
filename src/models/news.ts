@@ -1,4 +1,4 @@
-export interface News {
+export type News = {
     article_id: string;
     title: string;
     link: string;
