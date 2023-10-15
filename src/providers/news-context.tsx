@@ -1,8 +1,9 @@
-import React, { createContext, useContext, ReactNode } from 'react';
-import axios, { AxiosResponse } from "axios";
+import React, { createContext, useContext, ReactNode, useState } from 'react';
+import axios, { AxiosResponse, AxiosResponseHeaders } from "axios";
 import { GetLatestNews } from '../models/responses-body';
 import { NewsService } from '../models/services';
 import { LatestNewsPayload } from '../models/responses-payload';
+import { News } from '../models/news';
 
 const API_KEY = process.env.REACT_APP_API_KEY; // news.io public api key
 const NewsContext = createContext<NewsService | undefined>(undefined); // news api context
@@ -19,49 +20,56 @@ const handleCatch = (error: any) => {
     }
 }
 
-const NewsProvider = ({ children }: { children: ReactNode }) => {
-    const baseUrl = 'https://newsdata.io/api/1/news';
+export const NewsProvider = ({ children }: { children: ReactNode }) => {
+    const baseUrl: string = 'https://newsdata.io/api/1/news';
     // Specify the content type as JSON in the request headers
-    const requestHeader = {
+    const requestHeader: object = {
         'Content-Type': 'application/json',
     };
 
+    // news title filter 
+    const [titleFilter, setTitleFilter] = useState<string>(''); //empty string will send indefined in api request
+
     // Define the function to get the latest news
-    const getLatestNews = async (titleFilter: string, page?: number): Promise<LatestNewsPayload> => {
+    const getLatestNews = async (): Promise<LatestNewsPayload | undefined> => {
+
         const getNewsBody: GetLatestNews = {
             apikey: API_KEY,
             language: 'en',
-            qlnTitle: titleFilter,
+            qInTitle: titleFilter !== '' ? titleFilter : undefined,
             full_content: 0,
             size: 3,
             prioritydomain: 'top',
-            page: page,
         };
+
         try {
-            const response: AxiosResponse = await axios.get(baseUrl, {
+            const response: AxiosResponse<LatestNewsPayload> = await axios.get(baseUrl, {
                 headers: requestHeader,
                 params: getNewsBody,
             });
-            return response.data;
+            if (response.status === 200 && response.data.status === "success") {
+                return response.data;
+            }
+            else {
+                throw Error("Failed to call api");
+            }
         } catch (error) {
             handleCatch(error);
-            throw error;
+            return undefined;
         }
     }
 
     return (
-        <NewsContext.Provider value={{ getLatestNews }}>
+        <NewsContext.Provider value={{ getLatestNews, setTitleFilter }}>
             {children}
         </NewsContext.Provider>
     );
 };
 
-const useNewsProvider = (): NewsService => {
+export const useNewsProvider = (): NewsService => {
     const context = useContext(NewsContext);
     if (context === undefined) {
         throw new Error('Undefined NewsContext');
     }
     return context;
 };
-
-export default NewsProvider;

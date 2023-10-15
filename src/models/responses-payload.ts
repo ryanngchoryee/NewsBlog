@@ -1,8 +1,8 @@
 import { News } from "./news";
 
-export interface LatestNewsPayload {
+export type LatestNewsPayload = {
     status: string;
     totalResults: number;
     results: News[];
-    nextPage: number;
+    nextPage: number; //store next page index info
 }
