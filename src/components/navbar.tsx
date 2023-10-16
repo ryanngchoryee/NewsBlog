@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import { NavigationProps } from "../models/props";
 import '../css/navbar.css'
+import Button from 'react-bootstrap/Button';
 
 const Navigation: React.FC<NavigationProps> = ({ onTitleFilterChange }) => {
     const [searchValue, setSearchValue] = useState<string>("");
@@ -14,7 +15,8 @@ const Navigation: React.FC<NavigationProps> = ({ onTitleFilterChange }) => {
     }
 
     const handleSubmit = (e: FormEvent) => {
-        e.preventDefault(); // Prevent form submission
+        e.preventDefault(); // Prevent the default Enter key behavior
+        onTitleFilterChange(searchValue) //allow filter submission when unfocus from text box
     }
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,17 +37,18 @@ const Navigation: React.FC<NavigationProps> = ({ onTitleFilterChange }) => {
         <Navbar sticky="top" className="navbar bg-dark" >
             <Container fluid className="p-0">
                 <Navbar.Brand href="#home" className="text-light mx-4 navbar-brand">News Blog</Navbar.Brand>
-                <Form className="mx-4" onSubmit={handleSubmit}>
+                <Form className="mx-4 d-flex" onSubmit={handleSubmit}>
                     <Form.Control
                         type="text"
                         placeholder="Search news title..."
-                        className="mr-sm-2"
+                        className="me-2"
                         value={searchValue} // use state value as input value
                         onChange={handleInputChange} // handle manual value setting
                         onBlur={handleBlur} // allow user to search by clicking on other whitespace
                         onKeyDown={handleKeyDown} // allow user to submit by pressing enter
                         ref={inputRef} // Attach a ref to the input element
                     />
+                    <Button className='btnsearch' variant="outline-success">Search</Button>
                 </Form>
             </Container>
         </Navbar >
